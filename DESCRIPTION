@@ -1,0 +1,13 @@
+Package: FypSim
+Type: Package
+Title: Simulations for the First Year Paper
+Version: 1.0
+Date: 2017-05-13
+Author: Mihai Constantin
+Maintainer: Mihai Constantin <m.a.constantin@uvt.nl>
+Description: Replicable simulations for the First Year Paper.
+License: MIT + file LICENSE
+Depends: mirt
+Imports: Rcpp (>= 0.12.10)
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 6.0.1

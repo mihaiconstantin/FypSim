@@ -8,4 +8,4 @@ src/*.so
 src/*.dll
 src/_temp/
 cmake-build-debug/
-.idea
+.idea/

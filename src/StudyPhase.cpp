@@ -2,7 +2,7 @@
 #include "StudyPhase.h"
 #include "EnvironmentCallsR.h"
 #include "Statistics.h"
-
+#include <iostream>
 
 
 // Each cell will perform for a series of theta levels.
@@ -98,11 +98,6 @@ void StudyPhase::BuildThetaLevelsMatrix(const Rcpp::DoubleVector &thetaLevelsVec
     for (int level = 0; level < thetaLevelsVector.length(); ++level)
     {
         thetaLevels(Rcpp::_, level) = Rcpp::NumericVector(replications, thetaLevelsVector(level));
-
-        //for (unsigned int replication = 0; replication < replications; ++replication)
-        //{
-        //    thetaLevels(level, replication) = thetaLevelsVector(level);
-        //}
     }
 }
 

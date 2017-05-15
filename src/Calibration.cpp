@@ -2,7 +2,7 @@
 #include "Cell.h"
 #include "Calibration.h"
 #include "Statistics.h"
-#include <iostream>
+
 
 
 // Initialize the Calibration object and pass the relevant arguments.
@@ -94,7 +94,9 @@ void Calibration::EstimateParameters(const Rcpp::DoubleVector &population_theta)
 // appropriate class field.
 void Calibration::InjectResponseShift()
 {
+    // Convert the Rcpp numeric matrix to RcppArmadillo for easier cuts.
     arma::mat temp = Rcpp::as<arma::mat>(populationParameters);
+
 
     // We must subtract 1 because C++ indices start at 0 (i.e., a regular Rcpp matrix).
     // Therefore, if we get a proportion of 3, meaning 30%, we know that we need to
@@ -104,39 +106,29 @@ void Calibration::InjectResponseShift()
     // parameters of interest. See below.
     unsigned int proportion = (unsigned int) ceil(cellConfiguration->shiftProportion / 100 * cellConfiguration->testLength);
 
-    unsigned int uncel = (unsigned int) (cellConfiguration->shiftProportion / 100 * cellConfiguration->testLength);
-    double prod = cellConfiguration->shiftProportion / 100 * cellConfiguration->testLength;
-
-    std::cout << "Unceiled: " << uncel<< std::endl;
-    std::cout << "Ceiled: " << proportion << std::endl;
-    std::cout << "Double: " << prod << std::endl;
-
 
     // To avoid scenarios where the user types in wired proportions
     // we safely determine until what item we cut the matrix of
     // parameters to inject sift by checking some conditions.
-    unsigned int until_item = proportion - 1;
-    if (proportion == 0) { until_item = 0; }
-    if (proportion > cellConfiguration->testLength) { until_item = cellConfiguration->testLength - 1; }
-
-
-    std::cout << "Correction: " << until_item << std::endl;
-
-    // TODO: Fix the case when the proportion is 0. You might want to add an if and only run the .submat() if proportion > 0.
-
-    switch (cellConfiguration->shiftType)
+    if (proportion > 0)
     {
-        case 0:
-            temp.submat(0, 0, until_item, 0) = temp.submat(0, 0, until_item, 0) + cellConfiguration->shiftMagnitude;
-            break;
+        unsigned int until_item = proportion - 1;
+        if (proportion > cellConfiguration->testLength) { until_item = cellConfiguration->testLength - 1; }
 
-        case 1:
-            temp.submat(0, 1, until_item, (unsigned int) steps.length()) = temp.submat(0, 1, until_item, (unsigned int) steps.length()) + cellConfiguration->shiftMagnitude;
-            break;
+        switch (cellConfiguration->shiftType)
+        {
+            case 0:
+                temp.submat(0, 0, until_item, 0) = temp.submat(0, 0, until_item, 0) + cellConfiguration->shiftMagnitude;
+                break;
 
-        default:
-            temp.submat(0, 0, until_item, 0) = temp.submat(0, 0, until_item , 0) + cellConfiguration->shiftMagnitude;
-            temp.submat(0, 1, until_item, (unsigned int) steps.length()) = temp.submat(0, 1, until_item, (unsigned int) steps.length()) + cellConfiguration->shiftMagnitude;
+            case 1:
+                temp.submat(0, 1, until_item, (unsigned int) steps.length()) = temp.submat(0, 1, until_item, (unsigned int) steps.length()) + cellConfiguration->shiftMagnitude;
+                break;
+
+            default:
+                temp.submat(0, 0, until_item, 0) = temp.submat(0, 0, until_item , 0) + cellConfiguration->shiftMagnitude;
+                temp.submat(0, 1, until_item, (unsigned int) steps.length()) = temp.submat(0, 1, until_item, (unsigned int) steps.length()) + cellConfiguration->shiftMagnitude;
+        }
     }
 
     shiftedParameters = Rcpp::wrap(temp);

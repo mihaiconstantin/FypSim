@@ -72,22 +72,20 @@ Rcpp::NumericMatrix runCell(Rcpp::DoubleVector population_theta,
 
 
     // Perform the core of the study (i.e., apply LZ, but make sure you choose the parameters right).
-    //StudyPhase studiedCell(-2, 2, .5, 50);
-    //
+    StudyPhase studiedCell(-2, 2, .5, 500);
+
+
     // Determine under which model the cell falls (i.e., NULL or ALTERNATIVE) and pick the right item parameters.
-    //if ((int) shift_proportion > 0)
-    //{
-    //    studiedCell.ApplyLz(calibratedCell.getShiftedParameters(), calibratedCell.getPopulationParameters());
-    //}
-    //else
-    //{
-    //    studiedCell.ApplyLz(calibratedCell.getPopulationParameters(), calibratedCell.getPopulationParameters());
-    //}
-    //
-    //
+    if ((int) shift_proportion > 0)
+    {
+        studiedCell.ApplyLz(calibratedCell.getShiftedParameters(), calibratedCell.getPopulationParameters());
+    }
+    else
+    {
+        studiedCell.ApplyLz(calibratedCell.getPopulationParameters(), calibratedCell.getPopulationParameters());
+    }
+
+
     // Return the results for the current cell.
-    //return studiedCell.getCellResults();
-
-    return calibratedCell.getShiftedParameters();
-
+    return studiedCell.getCellResults();
 }

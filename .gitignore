@@ -3,6 +3,7 @@
 .Rhistory
 .RData
 .Ruserdata
+FypSim.Rproj
 src/*.o
 src/*.so
 src/*.dll

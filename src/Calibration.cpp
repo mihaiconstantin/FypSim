@@ -1,4 +1,6 @@
 #include <RcppArmadillo.h>
+// [[Rcpp::depends(RcppArmadillo)]]
+
 #include "Cell.h"
 #include "Calibration.h"
 #include "Statistics.h"
@@ -7,7 +9,7 @@
 
 // Initialize the Calibration object and pass the relevant arguments.
 // We will also pass the Cell struct by reference.
-Calibration::Calibration(Rcpp::DoubleVector &population_theta, Cell *cell_configuration)
+Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_configuration)
 {
 	// Store the addresses of the data we'll use for computations.
 	cellConfiguration = cell_configuration;

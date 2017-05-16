@@ -22,18 +22,28 @@ BEGIN_RCPP
 END_RCPP
 }
 // runCell
-Rcpp::NumericMatrix runCell(Rcpp::DoubleVector population_theta, double shift_proportion, double shift_magnitude, unsigned int shift_type, unsigned int parameters_type, unsigned int test_length);
-RcppExport SEXP FypSim_runCell(SEXP population_thetaSEXP, SEXP shift_proportionSEXP, SEXP shift_magnitudeSEXP, SEXP shift_typeSEXP, SEXP parameters_typeSEXP, SEXP test_lengthSEXP) {
+Rcpp::NumericMatrix runCell(double shift_proportion, double shift_magnitude, unsigned int shift_type, unsigned int parameters_type, unsigned int test_length);
+RcppExport SEXP FypSim_runCell(SEXP shift_proportionSEXP, SEXP shift_magnitudeSEXP, SEXP shift_typeSEXP, SEXP parameters_typeSEXP, SEXP test_lengthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::DoubleVector >::type population_theta(population_thetaSEXP);
     Rcpp::traits::input_parameter< double >::type shift_proportion(shift_proportionSEXP);
     Rcpp::traits::input_parameter< double >::type shift_magnitude(shift_magnitudeSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type shift_type(shift_typeSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type parameters_type(parameters_typeSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type test_length(test_lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(runCell(population_theta, shift_proportion, shift_magnitude, shift_type, parameters_type, test_length));
+    rcpp_result_gen = Rcpp::wrap(runCell(shift_proportion, shift_magnitude, shift_type, parameters_type, test_length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// runSelectedCells
+Rcpp::List runSelectedCells(Rcpp::NumericMatrix selected_cells);
+RcppExport SEXP FypSim_runSelectedCells(SEXP selected_cellsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type selected_cells(selected_cellsSEXP);
+    rcpp_result_gen = Rcpp::wrap(runSelectedCells(selected_cells));
     return rcpp_result_gen;
 END_RCPP
 }

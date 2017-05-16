@@ -8,7 +8,7 @@ include_directories(C:/Users/M/Documents/R/win-library/3.4/RcppArmadillo/include
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-        src/_procedure.cpp
+        src/procedure.cpp
         src/Calibration.cpp
         src/Calibration.h
         src/Design.cpp
@@ -20,6 +20,8 @@ set(SOURCE_FILES
         src/StudyPhase.cpp
         src/StudyPhase.h
         src/EnvironmentCallsR.cpp
-        src/EnvironmentCallsR.h src/Procedure.cpp src/Procedure.h)
+        src/EnvironmentCallsR.h
+        src/DesignProcedure.cpp
+        src/DesignProcedure.h)
 
 add_executable(FypSim ${SOURCE_FILES})

@@ -17,7 +17,7 @@ private:
 
 
 public:
-	Calibration(Rcpp::DoubleVector &population_theta, Cell *cell_configuration);
+	Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_configuration);
 
 	void SampleParameters();
 

@@ -2,14 +2,12 @@
 % Please edit documentation in R/RcppExports.R
 \name{runCell}
 \alias{runCell}
-\title{Apply procedure for a single cell}
+\title{Applies procedure for a single cell}
 \usage{
-runCell(population_theta, shift_proportion, shift_magnitude, shift_type,
-  parameters_type, test_length)
+runCell(shift_proportion, shift_magnitude, shift_type, parameters_type,
+  test_length)
 }
 \arguments{
-\item{population_theta}{(double) Vector of latent abilities for the population.}
-
 \item{shift_proportion}{(double) Proportion of response shift.}
 
 \item{shift_magnitude}{(double) Magnitude of response shift.}
@@ -21,8 +19,8 @@ runCell(population_theta, shift_proportion, shift_magnitude, shift_type,
 \item{test_length}{(int) Lengths of the test (i.e., number of items).}
 }
 \description{
-Perform the calibration and estimation for a single cell. Subsequently, we will use this
-when we loop through the entire factorial design and for each cell we instantiate the
-SimulateCell class. We have to also keep an eye on the fact that the entire design
-in itself will also need to be replicated \code{n} times.
+Performs the calibration and estimation for a single cell. Subsequently, we will use this
+when we loop through the entire factorial design (i.e., see the runDesign() function).
+We have to also keep an eye on the fact that the entire design in itself will also
+need to be replicated \code{n} times.
 }

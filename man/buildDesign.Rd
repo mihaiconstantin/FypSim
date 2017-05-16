@@ -2,22 +2,22 @@
 % Please edit documentation in R/RcppExports.R
 \name{buildDesign}
 \alias{buildDesign}
-\title{Build the factorial design}
+\title{Builds the factorial design}
 \usage{
 buildDesign(shift_proportions, shift_magnitudes, shift_types, parameters_types,
   test_lengths)
 }
 \arguments{
-\item{s_prop}{(numeric vector) Proportions of response shift.}
+\item{shift_proportions}{(numeric vector) Proportions of response shift.}
 
-\item{s_magn}{(numeric vector) Magnitudes of response shift.}
+\item{shift_magnitudes}{(numeric vector) Magnitudes of response shift.}
 
-\item{s_type}{(numeric vector) Types of response shift (i.e., towards slope, threshold, or both).}
+\item{shift_types}{(numeric vector) Types of response shift (i.e., towards slope, threshold, or both).}
 
-\item{p_type}{(numeric vector) Types of item parameters (i.e., homogeneous or heterogeneous).}
+\item{parameters_types}{(numeric vector) Types of item parameters (i.e., homogeneous or heterogeneous).}
 
-\item{t_leng}{(numeric vector) Lengths of the test (i.e., number of items).}
+\item{test_lengths}{(numeric vector) Lengths of the test (i.e., number of items).}
 }
 \description{
-Build the factorial design based on the vectors of independent variables.
+Builds the factorial design based on the vectors of independent variables.
 }

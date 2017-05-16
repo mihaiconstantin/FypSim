@@ -2,7 +2,9 @@
 
 export(buildDesign)
 export(estimateParametersGrm)
+export(initializeDesign)
 export(runCell)
+export(runCellRange)
 export(runSelectedCells)
 export(runSelectedCellsWithReplication)
 import(mirt)

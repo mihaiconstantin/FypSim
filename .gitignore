@@ -7,3 +7,4 @@ FypSim.Rproj
 src/_temp/
 cmake-build-debug/
 .idea/
+*.RData

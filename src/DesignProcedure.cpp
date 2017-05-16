@@ -33,7 +33,7 @@ DesignProcedure::DesignProcedure(const double &start_level,
 
     // Print some feedback to the screen.
     std::cout << "\nTotal theta levels: " << totalLevels << " (" << start_level <<  " to " << end_level << " by "<< level_increments << ")" << std::endl;
-    std::cout << "Each  level is replicated: " << levelReplications << " times." << std::endl;
+    std::cout << "Each level is replicated: " << levelReplications << " times" << std::endl;
     std::cout << "Population sample size: " << populationSampleSize << std::endl;
 
     std::cout << "\n--------------------------\n- Starting at: " << time(&starting_time) << "\n--------------------------\n"<< std::endl;
@@ -109,7 +109,8 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
     // and store the results in the "aggregated" matrices.
     for (int cell = 0; cell < selected_cells.nrow(); ++cell)
     {
-        std::cout << "\t\tCell: " << cell + 1 << std::endl;
+        std::cout << "\t\tCell: " << cell + 1 << " (shift proportion: " << selected_cells(cell, 0) << " | shift magnitude: " << selected_cells(cell, 1) << " | shift type: " << selected_cells(cell, 2) << " | parameters type: " << selected_cells(cell, 3) << " | test length: " << selected_cells(cell, 4) << ")" << std::endl;
+
 
         Rcpp::NumericMatrix cell_data = RunCell(selected_cells(cell, 0), selected_cells(cell, 1), selected_cells(cell, 2), selected_cells(cell, 3), selected_cells(cell, 4));
 
@@ -127,7 +128,7 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
 // this current function does also replicate the selected cells N number of times.
 Rcpp::List DesignProcedure::RunSelectedCellsWithReplication(const Rcpp::NumericMatrix &selected_cells, const unsigned int &design_replications)
 {
-    std::cout << "Design replications requested: " << design_replications << std::endl;
+    std::cout << "Design replications requested: " << design_replications << " (for " << selected_cells.nrow() << " cells)" << std::endl;
 
     Rcpp::List replications(design_replications);
 

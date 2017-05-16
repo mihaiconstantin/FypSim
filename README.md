@@ -11,7 +11,7 @@ Finally, alongside with the source files (.cpp and .h), this repository also con
 ### Exported functions
 
 #### buildDesign()
-- build a matrix based on the combinations of all the factors in the study
+- building a matrix based on the combinations of all the factors in the study
 ```r
 # Specifing the factors.
 shift.proportion = c(0, 10, 20, 50)
@@ -43,7 +43,6 @@ design = buildDesign(shift.proportion,
 
 
 ```r
-# Running a single cell.
 single = runCell(shift_proportion = 50, 
                  shift_magnitude = .75, 
                  shift_type = 2,
@@ -62,7 +61,7 @@ selected = runSelectedCells(design[c(1, 33, 99), ])
 - applying the study procedure on a selected number of cells and replicating the procedure `n` number of times (i.e., it is a wrapper around `runSelectedCells()`)
 
 ```r
-runSelectedCellsWithReplication(design[c(1, 33, 99), ], 100)
+selectedWithReplication = runSelectedCellsWithReplication(design[c(1, 33, 99), ], 100)
 ```
 
 ***Note:*** *Check the documentation for each function for more details regarding the inputs and the outputs.*

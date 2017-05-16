@@ -1,6 +1,6 @@
-# FypSim (*Work in progress...*)
+# FypSim
 
-Convenient data simulations for a `Person-Fit Statistic` (l<sub>z</sub><sup>*</sup> for polychotomous items) using `R` and `C++`. Part of the First-Year Paper project at Tilburg University (2016-2017) &ndash; Individual Differences and Assessment Research Master's programme.
+**Convenient data simulations** for a `Person-Fit Statistic` (l<sub>z</sub><sup>*</sup> for polychotomous items) using `R` and `C++`. Part of the First-Year Paper project at Tilburg University (2016-2017) &ndash; Individual Differences and Assessment Research Master's programme.
 
 
 ## Description

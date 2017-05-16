@@ -47,3 +47,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// runSelectedCellsWithReplication
+Rcpp::List runSelectedCellsWithReplication(Rcpp::NumericMatrix selected_cells, unsigned int design_replications);
+RcppExport SEXP FypSim_runSelectedCellsWithReplication(SEXP selected_cellsSEXP, SEXP design_replicationsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type selected_cells(selected_cellsSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type design_replications(design_replicationsSEXP);
+    rcpp_result_gen = Rcpp::wrap(runSelectedCellsWithReplication(selected_cells, design_replications));
+    return rcpp_result_gen;
+END_RCPP
+}

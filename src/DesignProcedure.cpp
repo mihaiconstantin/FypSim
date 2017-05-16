@@ -3,6 +3,8 @@
 #include "Cell.h"
 #include "Calibration.h"
 #include "StudyPhase.h"
+#include <iostream>
+#include <time.h>
 
 
 
@@ -25,11 +27,17 @@ DesignProcedure::DesignProcedure(const double &start_level,
     populationSampleSize = population_sample_size;
 
     // Other generally applicable logic here.
-    //TODO: If the population sample needs to be drawn only once, then build a constructor and
-    //      perform the draw there. This will work because we only instantiate a procedure
-    //      object once, and only call the runner methods multiple times.
-}
 
+    // Getting the time when the simulations started.
+    time_t starting_time;
+
+    // Print some feedback to the screen.
+    std::cout << "\nTotal theta levels: " << totalLevels << std::endl;
+    std::cout << "Each  level is replicated: " << levelReplications << " times." << std::endl;
+    std::cout << "Population sample size: " << populationSampleSize << std::endl;
+
+    std::cout << "\n--------------------------\n- Starting at: " << time(&starting_time) << "\n--------------------------\n"<< std::endl;
+}
 
 
 
@@ -52,7 +60,6 @@ Rcpp::NumericMatrix DesignProcedure::RunCell(const double &shift_proportion,
     Configuration.testLength = test_length;
 
 
-    // TODO: Since we draw new population item parameters each time we run a cell, shouldn't we also draw a new vector of population thetas?
     // Perform the calibration using the population theta and the current configuration.
     // But first draw a new sample of population theta (for each cell ran).
     const Rcpp::DoubleVector population_theta = Rcpp::rnorm(populationSampleSize, 0, 1);
@@ -73,7 +80,6 @@ Rcpp::NumericMatrix DesignProcedure::RunCell(const double &shift_proportion,
     {
         studiedCell.ApplyLz(calibratedCell.getPopulationParameters(), calibratedCell.getPopulationParameters());
     }
-
 
     // Return the results for the current cell.
     return studiedCell.getCellResults();
@@ -98,10 +104,13 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
     Rcpp::NumericMatrix means(selected_cells.nrow(), totalLevels);
     Rcpp::NumericMatrix sds(selected_cells.nrow(), totalLevels);
 
+
     // Get the results for each cell in the selected cells matrix
     // and store the results in the "aggregated" matrices.
     for (int cell = 0; cell < selected_cells.nrow(); ++cell)
     {
+        std::cout << "\t\tCell: " << cell + 1 << std::endl;
+
         Rcpp::NumericMatrix cell_data = RunCell(selected_cells(cell, 0), selected_cells(cell, 1), selected_cells(cell, 2), selected_cells(cell, 3), selected_cells(cell, 4));
 
         detections(cell, Rcpp::_) = cell_data(0, Rcpp::_);
@@ -110,5 +119,31 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
     }
 
     return Rcpp::List::create(detections, means, sds);
+}
+
+
+
+// Very similar with the RunSelectedCells() function, the only noticeable difference being that
+// this current function does also replicate the selected cells N number of times.
+Rcpp::List DesignProcedure::RunSelectedCellsWithReplication(const Rcpp::NumericMatrix &selected_cells, const unsigned int &design_replications)
+{
+    std::cout << "Design replications requested: " << design_replications << std::endl;
+
+    Rcpp::List replications(design_replications);
+
+    for (unsigned int replication = 0; replication < design_replications; ++replication)
+    {
+        std::cout << "\n\tReplication: " << replication + 1 << std::endl;
+
+        replications(replication) = RunSelectedCells(selected_cells);
+    }
+
+
+    // Get the ending time of the simulation and print some feedback.
+    time_t ending_time;
+
+    std::cout << "\n--------------------------\n- Ending at: " << time(&ending_time) << "\n--------------------------\n"<< std::endl;
+
+    return replications;
 }
 

@@ -88,3 +88,25 @@ Rcpp::List runSelectedCells(Rcpp::NumericMatrix selected_cells)
 
     return runProcedure.RunSelectedCells(selected_cells);
 }
+
+
+
+//' Applies and replicates the procedure for a selected number of cells
+//'
+//' Very similar with the runSelectedCells() function, the only difference
+//' is that it also replicate the selected cells \code{n} times.
+//'
+//' @param selected_cells (numeric matrix) The selected cell configurations to be ran, where
+//' the columns respect the order indicated above.
+//' @param design_replications (int) The number of times the selected cells will be replicated.
+//'
+//' @export
+//'
+// [[Rcpp::export]]
+Rcpp::List runSelectedCellsWithReplication(Rcpp::NumericMatrix selected_cells, unsigned int design_replications)
+{
+    DesignProcedure runProcedure(-2, 2, .5, 9, 500, 500);
+    return runProcedure.RunSelectedCellsWithReplication(selected_cells, design_replications);
+}
+
+

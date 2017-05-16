@@ -64,3 +64,18 @@ runSelectedCells <- function(selected_cells) {
     .Call('FypSim_runSelectedCells', PACKAGE = 'FypSim', selected_cells)
 }
 
+#' Applies and replicates the procedure for a selected number of cells
+#'
+#' Very similar with the runSelectedCells() function, the only difference
+#' is that it also replicate the selected cells \code{n} times.
+#'
+#' @param selected_cells (numeric matrix) The selected cell configurations to be ran, where
+#' the columns respect the order indicated above.
+#' @param design_replications (int) The number of times the selected cells will be replicated.
+#'
+#' @export
+#'
+runSelectedCellsWithReplication <- function(selected_cells, design_replications) {
+    .Call('FypSim_runSelectedCellsWithReplication', PACKAGE = 'FypSim', selected_cells, design_replications)
+}
+

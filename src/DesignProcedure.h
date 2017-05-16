@@ -33,6 +33,9 @@ public:
     Rcpp::List RunSelectedCells(const Rcpp::NumericMatrix &selected_cells);
 
 
+    Rcpp::List RunSelectedCellsWithReplication(const Rcpp::NumericMatrix &selected_cells, const unsigned int &design_replications);
+
+
 };
 
 

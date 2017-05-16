@@ -4,9 +4,9 @@
 
 
 ## Description
-The code block above illustrates the main four functions in the package. Using them one is able to replicate the simulations for the First-Year Paper or test how the procedure perform against a specific combination of factors (i.e., see the package documentation). Also, make sure to check the documentation for each function listed bellow.
+The code block below illustrates the main four functions in the package. Using them, one is able to replicate the simulations for the First-Year Paper or test how the procedure performs against a specific combination of factors (i.e., see the package documentation). Also, make sure to check the documentation for each function listed below.
 
-Finally, alongside with the source files (`.cpp` and `.h`), this repository also contains the compiled files (`.dll` and `.o`) for a `64bit` platform. You can also compile for your specific platform. Note that the package relies heavily on the [Rcpp](https://github.com/RcppCore/Rcpp) and [RcppArmadillo](https://github.com/RcppCore/RcppArmadillo). Make sure you have the appropriate tools ready (e.g., see [section 1.3](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-FAQ.pdf) from the `Rcpp` vignettes). We recommend the [devtools](https://github.com/hadley/devtools) package for a straightforward installation and compilation once all the necessary tools are in place.
+Alongside with the source files (`.cpp` and `.h`), this repository also contains the compiled files (`.dll` and `.o`) for a `64bit` platform. You can also compile for your specific platform. Note that this package relies heavily on the [Rcpp](https://github.com/RcppCore/Rcpp) and [RcppArmadillo](https://github.com/RcppCore/RcppArmadillo) packages. Make sure you have the appropriate tools ready (e.g., see [section 1.3](https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-FAQ.pdf) from the `Rcpp` vignettes). We recommend using the [devtools](https://github.com/hadley/devtools) package for a straightforward installation and compilation, once all the necessary tools are in place.
 
 ### Exported functions
 
@@ -39,7 +39,7 @@ design = buildDesign(shift.proportion,
  ```
 
 #### runCell()
-- applying the study procedure on a single cell (i.e., referred to as row in the design matrix above)
+- applying the study procedure on a single cell (i.e., referred to as row in the `design` matrix above)
 
 
 ```r

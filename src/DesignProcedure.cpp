@@ -32,7 +32,7 @@ DesignProcedure::DesignProcedure(const double &start_level,
     time_t starting_time;
 
     // Print some feedback to the screen.
-    std::cout << "\nTotal theta levels: " << totalLevels << std::endl;
+    std::cout << "\nTotal theta levels: " << totalLevels << " (" << start_level <<  " to " << end_level << " by "<< level_increments << ")" << std::endl;
     std::cout << "Each  level is replicated: " << levelReplications << " times." << std::endl;
     std::cout << "Population sample size: " << populationSampleSize << std::endl;
 

@@ -11,18 +11,18 @@
 #' 
 initializeDesign <- function()
 {
-	shift.prop   = c(0, 10, 20, 50)
-	shift.magn   = c(-.75, -.25, .25, .75)
-	shift.type   = c(0, 1, 2)
-	item.para    = c(0, 1)
-	test.length  = c(5, 10, 30)
-
-
+	shift.proportion = c(0, 10, 25, 50, 70)
+	shift.magnitude  = c(-1, -.75, -.25, .25, .75, 1)
+	shift.type       = c(0, 1, 2)
+	parameters.type  = c(0, 1)
+	test.length      = c(5, 10, 30, 40)
+	
+	
 	# Building the factorial design.
-	design = buildDesign(shift.prop,
-						 shift.magn,
+	design = buildDesign(shift.proportion,
+						 shift.magnitude,
 						 shift.type,
-						 item.para,
+						 parameters.type,
 						 test.length)
 
 	return(design)

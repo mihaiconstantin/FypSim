@@ -74,11 +74,11 @@ Rcpp::NumericMatrix DesignProcedure::RunCell(const double &shift_proportion,
     // Determine under which model the cell falls (i.e., NULL or ALTERNATIVE) and pick the right item parameters.
     if ((int) shift_proportion > 0)
     {
-        studiedCell.ApplyLz(calibratedCell.getShiftedParameters(), calibratedCell.getPopulationParameters());
+        studiedCell.ApplyLz(calibratedCell.getShiftedParameters(), calibratedCell.getEstimatedParameters());
     }
     else
     {
-        studiedCell.ApplyLz(calibratedCell.getPopulationParameters(), calibratedCell.getPopulationParameters());
+        studiedCell.ApplyLz(calibratedCell.getPopulationParameters(), calibratedCell.getEstimatedParameters());
     }
 
     // Return the results for the current cell.

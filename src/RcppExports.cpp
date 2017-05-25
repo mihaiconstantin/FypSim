@@ -59,3 +59,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"FypSim_buildDesign", (DL_FUNC) &FypSim_buildDesign, 5},
+    {"FypSim_runCell", (DL_FUNC) &FypSim_runCell, 5},
+    {"FypSim_runSelectedCells", (DL_FUNC) &FypSim_runSelectedCells, 1},
+    {"FypSim_runSelectedCellsWithReplication", (DL_FUNC) &FypSim_runSelectedCellsWithReplication, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_FypSim(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}

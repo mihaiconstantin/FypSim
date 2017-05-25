@@ -2,6 +2,7 @@
 
 export(buildDesign)
 export(estimateParametersGrm)
+export(glueDesignPieces)
 export(initializeDesign)
 export(runCell)
 export(runCellRange)

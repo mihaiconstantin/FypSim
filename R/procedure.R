@@ -8,6 +8,7 @@
 #' Internal function that initalizes the factorial design from the default values.
 #' 
 #' @export
+#' 
 initializeDesign <- function()
 {
 	shift.prop   = c(0, 10, 20, 50)
@@ -29,11 +30,12 @@ initializeDesign <- function()
 
 
 
-#' Functions that allow to devide the simulations across multiple PCs.
+#' Function that allows to devide the simulations across multiple PCs.
 #' It stores both the data for the replications, and the designs.
 #' Storing the designs might help us spot possible mistakes.
 #' 
 #' @export
+#' 
 runCellRange <- function(start, end, directory = ".", replications = 100)
 {
 	setwd(directory)

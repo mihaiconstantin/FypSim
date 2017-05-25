@@ -2,14 +2,14 @@
 % Please edit documentation in R/procedure.R
 \name{runCellRange}
 \alias{runCellRange}
-\title{Functions that allow to devide the simulations across multiple PCs.
+\title{Function that allows to devide the simulations across multiple PCs.
 It stores both the data for the replications, and the designs.
 Storing the designs might help us spot possible mistakes.}
 \usage{
 runCellRange(start, end, directory = ".", replications = 100)
 }
 \description{
-Functions that allow to devide the simulations across multiple PCs.
+Function that allows to devide the simulations across multiple PCs.
 It stores both the data for the replications, and the designs.
 Storing the designs might help us spot possible mistakes.
 }

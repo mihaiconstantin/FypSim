@@ -11,7 +11,7 @@
 #' 
 initializeDesign <- function()
 {
-	shift.proportion = c(0, 10, 30, 50, 70)
+	shift.proportion = c(0, 10, 30, 50)
 	shift.magnitude  = c(-.75, -.25, .25, .75)
 	shift.type       = c(0, 1, 2)
 	parameters.type  = c(0, 1)

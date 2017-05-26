@@ -12,10 +12,10 @@
 initializeDesign <- function()
 {
 	shift.proportion = c(0, 10, 30, 50)
-	shift.magnitude  = c(-.75, -.25, .25, .75)
+	shift.magnitude  = c(-.75, -.3, .3, .75)
 	shift.type       = c(0, 1, 2)
 	parameters.type  = c(0, 1)
-	test.length      = c(5, 10, 30)
+	test.length      = c(12, 36, 72)
 	
 	
 	# Building the factorial design.
@@ -49,7 +49,7 @@ runCellRange <- function(start, end, directory = ".", replications = 100)
 	saveRDS(object = designs, file = paste(start, "_to_", end, "_designs.RData", sep = ""))
 	
 	
-	cat(paste(start, "_to_", end, "_results.RData", sep = ""), " was written sucessfuly at ", directory, "\n\n")
+	cat(paste(start, "_to_", end, "_results.RData", sep = ""), "was sucessfuly written at", directory, "\n\n")
 }
 
 

@@ -12,11 +12,11 @@
 // runner methods that will be called on the instantiated object. For example,
 // we can use it to specify the parameters under the cells will be ran.
 DesignProcedure::DesignProcedure(const double &start_level,
-                     const double &end_level,
-                     const double &level_increments,
-                     const unsigned int &total_levels,
-                     const unsigned int &level_replications,
-                     const unsigned int &population_sample_size)
+                                 const double &end_level,
+                                 const double &level_increments,
+                                 const unsigned int &total_levels,
+                                 const unsigned int &level_replications,
+                                 const unsigned int &population_sample_size)
 {
     // Set the configuration for the cells.
     startLevel = start_level;
@@ -26,17 +26,30 @@ DesignProcedure::DesignProcedure(const double &start_level,
     levelReplications = level_replications;
     populationSampleSize = population_sample_size;
 
+
     // Other generally applicable logic here.
 
-    // Getting the time when the simulations started.
-    time_t starting_time;
 
-    // Print some feedback to the screen.
-    std::cout << "\nTotal theta levels: " << totalLevels << " (" << start_level <<  " to " << end_level << " by "<< level_increments << ")" << std::endl;
-    std::cout << "Each level is replicated: " << levelReplications << " times" << std::endl;
-    std::cout << "Population sample size: " << populationSampleSize << std::endl;
+    // region feedback
+    // General setup feedback.
+    std::cout << "\nFor "
+              << totalLevels
+              << " levels of theta ("
+              << start_level <<  " to "
+              << end_level
+              << " by "
+              << level_increments
+              << ") with "
+              << levelReplications
+              << " replications at each level."
+              << std::endl;
 
-    std::cout << "\n--------------------------\n- Starting at: " << time(&starting_time) << "\n--------------------------\n"<< std::endl;
+    std::cout << "Population sample size: "
+              << populationSampleSize
+              << "."
+              << std::endl;
+    // endregion
+
 }
 
 
@@ -81,6 +94,7 @@ Rcpp::NumericMatrix DesignProcedure::RunCell(const double &shift_proportion,
         studiedCell.ApplyLz(calibratedCell.getPopulationParameters(), calibratedCell.getEstimatedParameters());
     }
 
+
     // Return the results for the current cell.
     return studiedCell.getCellResults();
 }
@@ -109,14 +123,30 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
     // and store the results in the "aggregated" matrices.
     for (int cell = 0; cell < selected_cells.nrow(); ++cell)
     {
-        std::cout << "\t\tCell: " << cell + 1 << " (shift proportion: " << selected_cells(cell, 0) << " | shift magnitude: " << selected_cells(cell, 1) << " | shift type: " << selected_cells(cell, 2) << " | parameters type: " << selected_cells(cell, 3) << " | test length: " << selected_cells(cell, 4) << ")" << std::endl;
-
+        // region feedback
+        // Print the current cell number and configuration.
+        std::cout << "\tCell "
+                  << cell + 1
+                  << ": ("
+                  << "shift proportion: "   << selected_cells(cell, 0)
+                  << " | shift magnitude: " << selected_cells(cell, 1)
+                  << " | shift type: "      << selected_cells(cell, 2)
+                  << " | parameters type: " << selected_cells(cell, 3)
+                  << " | test length: "     << selected_cells(cell, 4)
+                  << ") ";
+        // endregion
 
         Rcpp::NumericMatrix cell_data = RunCell(selected_cells(cell, 0), selected_cells(cell, 1), selected_cells(cell, 2), selected_cells(cell, 3), selected_cells(cell, 4));
 
         detections(cell, Rcpp::_) = cell_data(0, Rcpp::_);
         means(cell, Rcpp::_) = cell_data(1, Rcpp::_);
         sds(cell, Rcpp::_) = cell_data(2, Rcpp::_);
+
+
+        // region feedback
+        // Marking the cell competition.
+        std::cout << "done." << std::endl;
+        // endregion
     }
 
     return Rcpp::List::create(detections, means, sds);
@@ -128,22 +158,53 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
 // this current function does also replicate the selected cells N number of times.
 Rcpp::List DesignProcedure::RunSelectedCellsWithReplication(const Rcpp::NumericMatrix &selected_cells, const unsigned int &design_replications)
 {
-    std::cout << "Design replications requested: " << design_replications << " (for " << selected_cells.nrow() << " cells)" << std::endl;
+    // region feedback
+    // Recording the starting time of the design replications.
+    time_t starting_time;
+    time(&starting_time);
+
+    std::cout << "Design replications requested: "
+              << design_replications
+              << " (for "
+              << selected_cells.nrow()
+              << " cells)."
+              << std::endl;
+
+    std::cout << "\n-----------------------------\n"
+              << "- Starting the replications."
+              << "\n-----------------------------\n"
+              << std::endl;
+    // endregion
+
 
     Rcpp::List replications(design_replications);
 
     for (unsigned int replication = 0; replication < design_replications; ++replication)
     {
-        std::cout << "\n\tReplication: " << replication + 1 << std::endl;
+        // region feedback
+        // Prints the current replication.
+        std::cout << "\nReplication: "
+                  << replication + 1
+                  << std::endl;
+        // endregion
 
         replications(replication) = RunSelectedCells(selected_cells);
     }
 
 
-    // Get the ending time of the simulation and print some feedback.
+    // region feedback
+    // Recording the ending time of the design replications.
     time_t ending_time;
 
-    std::cout << "\n--------------------------\n- Ending at: " << time(&ending_time) << "\n--------------------------\n"<< std::endl;
+    std::cout << "\n\n-----------------------------------------------\n"
+              << "- Time summary: from "
+              << starting_time
+              << " to "
+              <<  time(&ending_time)
+              << "."
+              << "\n-----------------------------------------------\n"
+              << std::endl;
+    // endregion
 
     return replications;
 }

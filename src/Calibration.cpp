@@ -4,6 +4,7 @@
 #include "Cell.h"
 #include "Calibration.h"
 #include "Statistics.h"
+#include <iostream>
 
 
 
@@ -25,16 +26,41 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
     estimatedParameters = Rcpp::NumericMatrix(cellConfiguration->testLength, (unsigned int) steps.length() + 1);
 
 
-    // Sample the appropriate population parameters.
+    // Sample the appropriate population parameters. Then store the estimated parameters
+    // based on generated data. Inject the response shift in the right amount, at the
+    // right place. Also make sure that the estimated parameters via MIRT do not
+    // contain NaNs or NAs. If they do contain, then re-run the calibration
+    // phase (i.e., the 3 methods).
     SampleParameters();
-
-
-    // Store the estimated parameters based on generated data.
     EstimateParameters(population_theta);
-
-
-    // Inject the response shift in the right amount, at the right place.
     InjectResponseShift();
+
+    bool assumeNaN = true;
+
+    while (assumeNaN)
+    {
+        for (int column = 0; column < estimatedParameters.ncol(); ++column)
+        {
+            for (int row = 0; row < estimatedParameters.nrow(); ++row)
+            {
+                if(std::isnan(estimatedParameters(row, column)))
+                {
+                    // region feedback
+                    std::cout << "\t>>> (!) 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<<";
+                    // endregion
+
+                    SampleParameters();
+                    EstimateParameters(population_theta);
+                    InjectResponseShift();
+                }
+                else
+                {
+                    assumeNaN = false;
+                }
+            }
+        }
+    }
+
 }
 
 

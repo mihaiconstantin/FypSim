@@ -78,10 +78,23 @@ void StudyPhase::ApplyLz(const Rcpp::NumericMatrix &shifted_or_population_parame
         // or using the population parameters (NULL model).
         Rcpp::NumericMatrix data = Statistics::SimulateGrm(thetaLevels(Rcpp::_, level), shifted_or_population_parameters);
 
+
         Rcpp::NumericMatrix theta = Statistics::FullThetaWml(data, estimated_parameters);
+
+
         Rcpp::NumericMatrix lz = Statistics::FullPolyLzStar(data, estimated_parameters, theta(Rcpp::_, 0));
 
+
         cellResults(Rcpp::_, level) = AggregatedIndicators(lz);
+
+
+        // region TODO: Debug lz when more than 70 items
+        //std::cout << "\n-----------------------------------------------------------------\n" << std::endl;
+        //std::cout << "Theta: " << lz(499, 0) << std::endl;
+        //std::cout << "Lz: " << lz(499, 1) << std::endl;
+        //std::cout << "\n-----------------------------------------------------------------\n" << std::endl;
+        //throw 0;
+        // endregion
     }
 }
 

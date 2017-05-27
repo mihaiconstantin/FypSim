@@ -76,7 +76,6 @@ Rcpp::NumericMatrix DesignProcedure::RunCell(const double &shift_proportion,
     // Perform the calibration using the population theta and the current configuration.
     // But first draw a new sample of population theta (for each cell ran).
     const Rcpp::DoubleVector population_theta = Rcpp::rnorm(populationSampleSize, 0, 1);
-
     Calibration calibratedCell(population_theta, &Configuration);
 
 

@@ -267,7 +267,7 @@ Rcpp::NumericVector Statistics::EstimateThetaWml(const Rcpp::NumericVector &data
 // Runs for each item response vector at a time.
 Rcpp::NumericVector Statistics::EstimatePolyLzStar(const Rcpp::NumericVector &data, const Rcpp::NumericMatrix &ipar, const double &theta)
 {
-    // TODO: The initialization at 10 means that weenvisionn a maximum number of 10 item steps.
+    // TODO: The initialization at 10 means that envision a maximum number of 10 item steps.
     // Declarations.
     Rcpp::NumericVector lz(2), P(10), Q(10);
 
@@ -399,6 +399,17 @@ Rcpp::NumericVector Statistics::EstimatePolyLzStar(const Rcpp::NumericVector &da
 
     // Prepare the return.
     lz[1] = (stat + cn * s0) / sqrt(varLz);
+
+
+    // region TODO: debug scenarios when we use more than 70 items
+    //std::cout << "varLz: " << varLz << std::endl;
+    //std::cout << "stat: " << stat << std::endl;
+    //std::cout << "cn: " << cn << std::endl;
+    //std::cout << "s0: " << s0 << std::endl;
+    //std::cout << "lz: " << (stat + cn * s0) / sqrt(varLz) << std::endl;
+    //std::cout << "vector: " << data << std::endl;
+    //std::cout << "------------------" << std::endl;
+    // endregion
 
 
     return (lz);

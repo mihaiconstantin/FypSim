@@ -14,11 +14,11 @@ Alongside with the source files (`.cpp` and `.h`), this repository also contains
 - building a matrix based on the combinations of all the factors in the study
 ```r
 # Specifing the factors.
-shift.proportion = c(0, 10, 30, 50)
-shift.magnitude  = c(-.75, -.25, .25, .75)
+shift.proportion = c(0, 10, 30, 50, 70)
+shift.magnitude  = c(-.8, -.4, .4, .8)
 shift.type       = c(0, 1, 2)
 parameters.type  = c(0, 1)
-test.length      = c(5, 10, 30)
+test.length      = c(10, 30, 50)
 	
 
 # Building the factorial design.

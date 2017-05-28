@@ -46,7 +46,7 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
                 if(std::isnan(estimatedParameters(row, column)))
                 {
                     // region feedback
-                    std::cout << "\t>>> (!) 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<<";
+                    std::cout << "\t>>> (!) 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<< ";
                     // endregion
 
                     SampleParameters();

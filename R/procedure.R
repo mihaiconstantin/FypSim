@@ -11,11 +11,11 @@
 #' 
 initializeDesign <- function()
 {
-	shift.proportion = c(0, 10, 30, 50, 70)
+	shift.proportion = c(0, 30, 70)
 	shift.magnitude  = c(-.8, -.4, .4, .8)
 	shift.type       = c(0, 1, 2)
 	parameters.type  = c(0, 1)
-	test.length      = c(10, 30, 50)
+	test.length      = c(5, 15, 30)
 	
 	
 	# Building the factorial design.

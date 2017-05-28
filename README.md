@@ -14,11 +14,11 @@ Alongside with the source files (`.cpp` and `.h`), this repository also contains
 - building a matrix based on the combinations of all the factors in the study
 ```r
 # Specifing the factors.
-shift.proportion = c(0, 10, 30, 50, 70)
+shift.proportion = c(0, 30, 70)
 shift.magnitude  = c(-.8, -.4, .4, .8)
 shift.type       = c(0, 1, 2)
 parameters.type  = c(0, 1)
-test.length      = c(10, 30, 50)
+test.length      = c(5, 15, 30)
 	
 
 # Building the factorial design.
@@ -30,12 +30,12 @@ design = buildDesign(shift.proportion,
 		     
 > head(design)
      [,1]  [,2] [,3] [,4] [,5]
-[1,]    0 -0.75    0    0    5
-[2,]    0 -0.75    0    0   10
-[3,]    0 -0.75    0    0   30
-[4,]    0 -0.75    0    1    5
-[5,]    0 -0.75    0    1   10
-[6,]    0 -0.75    0    1   30
+[1,]    0 -0.8    0    0    5
+[2,]    0 -0.8    0    0   15
+[3,]    0 -0.8    0    0   30
+[4,]    0 -0.8    0    1    5
+[5,]    0 -0.8    0    1   15
+[6,]    0 -0.8    0    1   30
  ```
 
 #### runCell()

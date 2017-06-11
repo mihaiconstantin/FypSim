@@ -15,7 +15,7 @@ initializeDesign <- function()
 	shift.magnitude  = c(-.8, -.4, .4, .8)
 	shift.type       = c(0, 1, 2)
 	parameters.type  = c(0, 1)
-	test.length      = c(5, 15, 30)
+	test.length      = c(12, 36, 72)
 	
 	
 	# Building the factorial design.

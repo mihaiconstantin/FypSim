@@ -272,7 +272,7 @@ Rcpp::NumericVector Statistics::EstimatePolyLzStar(const Rcpp::NumericVector &da
     Rcpp::NumericVector lz(2), P(10), Q(10);
 
     lz[0] = theta;
-    const int maxJ = 50;
+    const int maxJ = 80;
     const int maxK = 10;
 
     int K = ipar.ncol();
@@ -408,6 +408,7 @@ Rcpp::NumericVector Statistics::EstimatePolyLzStar(const Rcpp::NumericVector &da
     //std::cout << "s0: " << s0 << std::endl;
     //std::cout << "lz: " << (stat + cn * s0) / sqrt(varLz) << std::endl;
     //std::cout << "vector: " << data << std::endl;
+    //std::cout << "theta: " << theta << std::endl;
     //std::cout << "------------------" << std::endl;
     // endregion
 

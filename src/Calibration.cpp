@@ -40,27 +40,29 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
 
     while (assumeMissing)
     {
-        for (int column = 0; column < estimatedParameters.ncol(); ++column)
+        if (Utils::IsMissing(estimatedParameters))
         {
-            for (int row = 0; row < estimatedParameters.nrow(); ++row)
-            {
-                if(Utils::IsMissing(estimatedParameters(row, column)))
-                {
-                    // region feedback
-                    std::cout << " >>> 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<< ";
-                    // endregion
+            // region feedback
+            std::cout << " >>> 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<< ";
+            // endregion
 
-                    SampleParameters();
-                    EstimateParameters(population_theta);
-                    InjectResponseShift();
-                }
-                else
-                {
-                    assumeMissing = false;
-                }
-            }
+            SampleParameters();
+            EstimateParameters(population_theta);
+            InjectResponseShift();
         }
+        else
+        {
+            assumeMissing = false;
+        }
+
     }
+
+    // TODO: Currently debugging in this section.
+    //if(Utils::IsMissing(populationParameters))  std::cout << "!!! missing in populationParameters !!!"  << std::endl;
+    //if(Utils::IsMissing(estimatedParameters))   std::cout << "!!! missing in estimatedParameters !!!"   << std::endl;
+    //if(Utils::IsMissing(shiftedParameters))     std::cout << "!!! missing in shiftedParameters !!!"     << std::endl;
+    //if(Utils::IsMissing(population_theta))      std::cout << "!!! missing in population_theta !!!"      << std::endl;
+    //std::cout << "calibration check completed" << std::endl;
 
 }
 

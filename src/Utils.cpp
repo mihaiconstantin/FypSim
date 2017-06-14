@@ -1,13 +1,13 @@
+#include <Rcpp.h>
 #include "Utils.h"
-#include <R.h>
 
 
-// Check if the values passed is either NA or NaN.
+// Check if a single value passed is either NA or NaN.
 bool Utils::IsMissing(const double &value)
 {
     bool isMissing = false;
 
-    if (R_IsNaN(value) || R_IsNA(value) || ISNA(value) || ISNAN(value))
+    if (R_IsNaN(value) || R_IsNA(value) || ISNA(value) || ISNAN(value) || std::isnan(value))
     {
         isMissing = true;
     }
@@ -16,4 +16,34 @@ bool Utils::IsMissing(const double &value)
 }
 
 
-// Next method.
+// Check if a vector passed contains either NA or NaN.
+bool Utils::IsMissing(const Rcpp::NumericVector &vectorValues)
+{
+    for (int i = 0; i < vectorValues.length(); ++i)
+    {
+        if (Utils::IsMissing(vectorValues(i)))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+// Check if a vector passed contains either NA or NaN.
+bool Utils::IsMissing(const Rcpp::NumericMatrix &matrixValues)
+{
+    for (int column = 0; column < matrixValues.ncol(); ++column)
+    {
+        for (int row = 0; row < matrixValues.nrow(); ++row)
+        {
+            if (Utils::IsMissing(matrixValues(row, column)))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}

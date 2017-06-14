@@ -249,7 +249,6 @@ Rcpp::NumericVector Statistics::EstimateThetaWml(const Rcpp::NumericVector &data
     if (t < MaxIter) { converg = 1; } else { converg = 0; }
 
     if(abs((int) thEst) < 4 && thEst == thEst) { valOut = 1; } else { valOut = 0; }
-    //abs((int) thEst) < 4 && thEst == thEst ? valOut = 1 : valOut = 0;
 
 
     thHat[0] = thEst;

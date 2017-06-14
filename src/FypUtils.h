@@ -1,8 +1,8 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef FYPUTILS_H
+#define FYPUTILS_H
 
 
-class Utils
+class FypUtils
 {
 
 public:

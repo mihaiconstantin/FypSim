@@ -1,9 +1,9 @@
 #include <Rcpp.h>
-#include "Utils.h"
+#include "FypUtils.h"
 
 
 // Check if a single value passed is either NA or NaN.
-bool Utils::IsMissing(const double &value)
+bool FypUtils::IsMissing(const double &value)
 {
     bool isMissing = false;
 
@@ -17,7 +17,7 @@ bool Utils::IsMissing(const double &value)
 
 
 // Check if a vector passed contains either NA or NaN.
-bool Utils::IsMissing(const Rcpp::NumericVector &vectorValues)
+bool FypUtils::IsMissing(const Rcpp::NumericVector &vectorValues)
 {
     for (int i = 0; i < vectorValues.length(); ++i)
     {
@@ -32,7 +32,7 @@ bool Utils::IsMissing(const Rcpp::NumericVector &vectorValues)
 
 
 // Check if a vector passed contains either NA or NaN.
-bool Utils::IsMissing(const Rcpp::NumericMatrix &matrixValues)
+bool FypUtils::IsMissing(const Rcpp::NumericMatrix &matrixValues)
 {
     for (int column = 0; column < matrixValues.ncol(); ++column)
     {

@@ -22,6 +22,8 @@ set(SOURCE_FILES
         src/EnvironmentCallsR.cpp
         src/EnvironmentCallsR.h
         src/DesignProcedure.cpp
-        src/DesignProcedure.h src/Utils.cpp src/Utils.h)
+        src/DesignProcedure.h
+        src/FypUtils.cpp
+        src/FypUtils.h)
 
 add_executable(FypSim ${SOURCE_FILES})

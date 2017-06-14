@@ -4,7 +4,7 @@
 #include "Cell.h"
 #include "Calibration.h"
 #include "Statistics.h"
-#include "Utils.h"
+#include "FypUtils.h"
 #include <iostream>
 
 
@@ -40,7 +40,7 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
 
     while (assumeMissing)
     {
-        if (Utils::IsMissing(estimatedParameters))
+        if (FypUtils::IsMissing(estimatedParameters))
         {
             // region feedback
             std::cout << " >>> 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<< ";
@@ -58,10 +58,10 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
     }
 
     // TODO: Currently debugging in this section.
-    //if(Utils::IsMissing(populationParameters))  std::cout << "!!! missing in populationParameters !!!"  << std::endl;
-    //if(Utils::IsMissing(estimatedParameters))   std::cout << "!!! missing in estimatedParameters !!!"   << std::endl;
-    //if(Utils::IsMissing(shiftedParameters))     std::cout << "!!! missing in shiftedParameters !!!"     << std::endl;
-    //if(Utils::IsMissing(population_theta))      std::cout << "!!! missing in population_theta !!!"      << std::endl;
+    //if(FypUtils::IsMissing(populationParameters))  std::cout << "!!! missing in populationParameters !!!"  << std::endl;
+    //if(FypUtils::IsMissing(estimatedParameters))   std::cout << "!!! missing in estimatedParameters !!!"   << std::endl;
+    //if(FypUtils::IsMissing(shiftedParameters))     std::cout << "!!! missing in shiftedParameters !!!"     << std::endl;
+    //if(FypUtils::IsMissing(population_theta))      std::cout << "!!! missing in population_theta !!!"      << std::endl;
     //std::cout << "calibration check completed" << std::endl;
 
 }

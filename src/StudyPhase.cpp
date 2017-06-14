@@ -2,6 +2,7 @@
 #include "StudyPhase.h"
 #include "EnvironmentCallsR.h"
 #include "Statistics.h"
+#include "FypUtils.h"
 #include <iostream>
 
 
@@ -88,13 +89,13 @@ void StudyPhase::ApplyLz(const Rcpp::NumericMatrix &shifted_or_population_parame
         cellResults(Rcpp::_, level) = AggregatedIndicators(lz);
 
 
-        // region TODO: Debug lz when more than 70 items
-        //std::cout << "\n-----------------------------------------------------------------\n" << std::endl;
-        //std::cout << "Theta: " << lz(499, 0) << std::endl;
-        //std::cout << "Lz: " << lz(499, 1) << std::endl;
-        //std::cout << "\n-----------------------------------------------------------------\n" << std::endl;
-        //throw 0;
-        // endregion
+        // TODO: Currently debugging in this section.
+        if(FypUtils::IsMissing(data))         std::cout << "!!! missing in data under ApplyLz method !!!"           << std::endl;
+        if(FypUtils::IsMissing(theta))        std::cout << "!!! missing in theta under ApplyLz method !!!"          << std::endl;
+        if(FypUtils::IsMissing(lz))           std::cout << "!!! missing in lz under ApplyLz method !!!"             << std::endl;
+        if(FypUtils::IsMissing(cellResults))  std::cout << "!!! missing in cellResults under ApplyLz method !!!"    << std::endl;
+
+
     }
 }
 
@@ -125,6 +126,8 @@ Rcpp::NumericVector StudyPhase::AggregatedIndicators(const Rcpp::NumericMatrix &
     double detection = Rcpp::mean(detections);
     double mean = Rcpp::mean(lz_stats(Rcpp::_, 1));
     double sd = Rcpp::sd(lz_stats(Rcpp::_, 1));
+
+    // TODO: Add the computation for effect size of response shift absorption into theta.
 
     return Rcpp::NumericVector::create(detection, mean, sd);
 }

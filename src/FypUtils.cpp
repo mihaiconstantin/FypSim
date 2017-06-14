@@ -21,7 +21,7 @@ bool FypUtils::IsMissing(const Rcpp::NumericVector &vectorValues)
 {
     for (int i = 0; i < vectorValues.length(); ++i)
     {
-        if (Utils::IsMissing(vectorValues(i)))
+        if (FypUtils::IsMissing(vectorValues(i)))
         {
             return true;
         }
@@ -38,7 +38,7 @@ bool FypUtils::IsMissing(const Rcpp::NumericMatrix &matrixValues)
     {
         for (int row = 0; row < matrixValues.nrow(); ++row)
         {
-            if (Utils::IsMissing(matrixValues(row, column)))
+            if (FypUtils::IsMissing(matrixValues(row, column)))
             {
                 return true;
             }

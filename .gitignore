@@ -8,3 +8,5 @@ src/_temp/
 cmake-build-debug/
 .idea/
 *.RData
+*.o
+*.dll

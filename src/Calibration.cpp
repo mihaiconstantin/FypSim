@@ -4,6 +4,7 @@
 #include "Cell.h"
 #include "Calibration.h"
 #include "Statistics.h"
+#include "Utils.h"
 #include <iostream>
 
 
@@ -35,18 +36,18 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
     EstimateParameters(population_theta);
     InjectResponseShift();
 
-    bool assumeNaN = true;
+    bool assumeMissing = true;
 
-    while (assumeNaN)
+    while (assumeMissing)
     {
         for (int column = 0; column < estimatedParameters.ncol(); ++column)
         {
             for (int row = 0; row < estimatedParameters.nrow(); ++row)
             {
-                if(std::isnan(estimatedParameters(row, column)))
+                if(Utils::IsMissing(estimatedParameters(row, column)))
                 {
                     // region feedback
-                    std::cout << "\t>>> (!) 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<< ";
+                    std::cout << " >>> 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<< ";
                     // endregion
 
                     SampleParameters();
@@ -55,7 +56,7 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
                 }
                 else
                 {
-                    assumeNaN = false;
+                    assumeMissing = false;
                 }
             }
         }

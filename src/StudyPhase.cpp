@@ -71,7 +71,7 @@ StudyPhase::StudyPhase(const double &low_level, const double &high_level, const 
 // model.
 void StudyPhase::ApplyLz(const Rcpp::NumericMatrix &shifted_or_population_parameters, const Rcpp::NumericMatrix &estimated_parameters)
 {
-    cellResults = Rcpp::NumericMatrix(3, thetaLevels.ncol());
+    cellResults = Rcpp::NumericMatrix(4, thetaLevels.ncol());
 
     for (int level = 0; level < thetaLevels.ncol(); ++level)
     {

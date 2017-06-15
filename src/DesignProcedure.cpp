@@ -150,7 +150,7 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
         // endregion
     }
 
-    return Rcpp::List::create(detections, means, sds);
+    return Rcpp::List::create(detections, means, sds, effect);
 }
 
 

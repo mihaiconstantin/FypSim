@@ -17,9 +17,9 @@ public:
 
     void ApplyLz(const Rcpp::NumericMatrix &shifted_or_population_parameters, const Rcpp::NumericMatrix &estimated_parameters);
 
-    Rcpp::NumericVector AggregatedIndicators(const Rcpp::NumericMatrix &lz_stats);
+    Rcpp::NumericVector AggregatedIndicators(const Rcpp::NumericMatrix &lz_stats, const Rcpp::NumericVector &thetaLevel, const Rcpp::NumericVector &wlmThetaLevel);
 
-
+    
 
     // region getters
 

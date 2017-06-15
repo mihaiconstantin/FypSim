@@ -86,15 +86,14 @@ void StudyPhase::ApplyLz(const Rcpp::NumericMatrix &shifted_or_population_parame
         Rcpp::NumericMatrix lz = Statistics::FullPolyLzStar(data, estimated_parameters, theta(Rcpp::_, 0));
 
 
-        cellResults(Rcpp::_, level) = AggregatedIndicators(lz);
+        cellResults(Rcpp::_, level) = AggregatedIndicators(lz, thetaLevels(Rcpp::_, level), theta);
 
 
-        // TODO: Currently debugging in this section.
-        if(FypUtils::IsMissing(data))         std::cout << "!!! missing in data under ApplyLz method !!!"           << std::endl;
-        if(FypUtils::IsMissing(theta))        std::cout << "!!! missing in theta under ApplyLz method !!!"          << std::endl;
-        if(FypUtils::IsMissing(lz))           std::cout << "!!! missing in lz under ApplyLz method !!!"             << std::endl;
-        if(FypUtils::IsMissing(cellResults))  std::cout << "!!! missing in cellResults under ApplyLz method !!!"    << std::endl;
-
+        // For safety reasons, let's check every single vector/ matrix we compute to see if NA/ NaN found their way in.
+        if(FypUtils::IsMissing(data))        std::cout << " >>> Error: NA | NaN (file: StudyPhase.cpp). Missing in 'data' under 'ApplyLz method'. <<< ";
+        if(FypUtils::IsMissing(theta))       std::cout << " >>> Error: NA | NaN (file: StudyPhase.cpp). Missing in 'theta' under 'ApplyLz method'. <<< ";
+        if(FypUtils::IsMissing(lz))          std::cout << " >>> Error: NA | NaN (file: StudyPhase.cpp). Missing in 'lz' under 'ApplyLz method'. <<< ";
+        if(FypUtils::IsMissing(cellResults)) std::cout << " >>> Error: NA | NaN (file: StudyPhase.cpp). Missing in 'cellResults' under 'ApplyLz method'. <<< ";
 
     }
 }
@@ -118,18 +117,17 @@ void StudyPhase::BuildThetaLevelsMatrix(const Rcpp::DoubleVector &thetaLevelsVec
 
 
 // Extract the relevant stats we are interested in from the numeric matrix
-// resulted aster we estimated the lz.
-Rcpp::NumericVector StudyPhase::AggregatedIndicators(const Rcpp::NumericMatrix &lz_stats)
+// resulted aster we estimated the lz. Also, compute the effect size.
+Rcpp::NumericVector StudyPhase::AggregatedIndicators(const Rcpp::NumericMatrix &lz_stats, const Rcpp::NumericVector &thetaLevel, const Rcpp::NumericVector &wlmThetaLevel)
 {
     Rcpp::LogicalVector detections = lz_stats(Rcpp::_, 1) <= -1.645;
 
     double detection = Rcpp::mean(detections);
     double mean = Rcpp::mean(lz_stats(Rcpp::_, 1));
     double sd = Rcpp::sd(lz_stats(Rcpp::_, 1));
+    double effect = Statistics::CohenEffectSize(thetaLevel, wlmThetaLevel);
 
-    // TODO: Add the computation for effect size of response shift absorption into theta.
-
-    return Rcpp::NumericVector::create(detection, mean, sd);
+    return Rcpp::NumericVector::create(detection, mean, sd, effect);
 }
 
 

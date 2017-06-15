@@ -22,6 +22,11 @@ public:
 
     static Rcpp::NumericMatrix FullPolyLzStar(const Rcpp::NumericMatrix &data, const Rcpp::NumericMatrix &item_parameters, const Rcpp::DoubleVector &theta);
 
+
+    // Other trivial statistics.
+
+    static double CohenEffectSize(const Rcpp::NumericVector &firstVector, const Rcpp::NumericVector &secondVector);
+
 };
 
 

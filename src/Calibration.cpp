@@ -43,7 +43,7 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
         if (FypUtils::IsMissing(estimatedParameters))
         {
             // region feedback
-            std::cout << " >>> 'MIRT' estimation produced 'NaNs'. Re-calibrating the cell. <<< ";
+            std::cout << " >>> 'MIRT' estimation produced NA or NaN. Re-calibrating the cell. <<< ";
             // endregion
 
             SampleParameters();
@@ -57,11 +57,10 @@ Calibration::Calibration(const Rcpp::DoubleVector &population_theta, Cell *cell_
 
     }
 
-    // TODO: Currently debugging in this section.
-    if(FypUtils::IsMissing(populationParameters))  std::cout << "!!! missing in populationParameters under Calibration method !!!"  << std::endl;
-    if(FypUtils::IsMissing(estimatedParameters))   std::cout << "!!! missing in estimatedParameters under Calibration method !!!"   << std::endl;
-    if(FypUtils::IsMissing(shiftedParameters))     std::cout << "!!! missing in shiftedParameters under Calibration method !!!"     << std::endl;
-    if(FypUtils::IsMissing(population_theta))      std::cout << "!!! missing in population_theta under Calibration method !!!"      << std::endl;
+    // For safety reasons, let's check every single vector/ matrix we compute to see if NA/ NaN found their way in.
+    if(FypUtils::IsMissing(populationParameters))  std::cout << " >>> Error: NA | NaN (file: Calibration.cpp). Missing in 'populationParameters' under 'Calibration method'. <<< ";
+    if(FypUtils::IsMissing(estimatedParameters))   std::cout << " >>> Error: NA | NaN (file: Calibration.cpp). Missing in 'estimatedParameters' under 'Calibration method'. <<< ";
+    if(FypUtils::IsMissing(shiftedParameters))     std::cout << " >>> Error: NA | NaN (file: Calibration.cpp). Missing in 'shiftedParameters' under 'Calibration method'. <<< ";
 
 }
 

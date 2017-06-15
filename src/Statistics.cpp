@@ -620,3 +620,11 @@ Rcpp::NumericMatrix Statistics::FullPolyLzStar(const Rcpp::NumericMatrix &data, 
 }
 
 // endregion
+
+
+
+// Cohen's d effect size statistic.
+double Statistics::CohenEffectSize(const Rcpp::NumericVector &firstVector, const Rcpp::NumericVector &secondVector)
+{
+    return (Rcpp::mean(firstVector) - Rcpp::mean(secondVector)) / sqrt((pow(Rcpp::sd(firstVector), 2) + pow(Rcpp::sd(secondVector), 2)) / 2);
+}

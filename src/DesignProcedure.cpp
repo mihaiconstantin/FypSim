@@ -116,6 +116,7 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
     Rcpp::NumericMatrix detections(selected_cells.nrow(), totalLevels);
     Rcpp::NumericMatrix means(selected_cells.nrow(), totalLevels);
     Rcpp::NumericMatrix sds(selected_cells.nrow(), totalLevels);
+    Rcpp::NumericMatrix effect(selected_cells.nrow(), totalLevels);
 
 
     // Get the results for each cell in the selected cells matrix
@@ -140,11 +141,12 @@ Rcpp::List DesignProcedure::RunSelectedCells(const Rcpp::NumericMatrix &selected
         detections(cell, Rcpp::_) = cell_data(0, Rcpp::_);
         means(cell, Rcpp::_) = cell_data(1, Rcpp::_);
         sds(cell, Rcpp::_) = cell_data(2, Rcpp::_);
+        effect(cell, Rcpp::_) = cell_data(3, Rcpp::_);
 
 
         // region feedback
         // Marking the cell competition.
-        std::cout << "done." << std::endl;
+        std::cout << " |done|" << std::endl;
         // endregion
     }
 

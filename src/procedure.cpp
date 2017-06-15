@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 #include "Design.h"
 #include "DesignProcedure.h"
+#include "Statistics.h"
 
 
 
@@ -110,3 +111,18 @@ Rcpp::List runSelectedCellsWithReplication(Rcpp::NumericMatrix selected_cells, u
 }
 
 
+
+//' Compute Cohen's effect size
+//'
+//' Compute the \code{d} effect size measure for two numeric vectors.
+//'
+//' @param firstVector (numeric vector) The first vector used in the effect size computations.
+//' @param secondVector (numeric vector) The second vector used in the effect size computations.
+//'
+//' @export
+//'
+// [[Rcpp::export]]
+double effectSizeCohen(Rcpp::NumericVector &firstVector, Rcpp::NumericVector &secondVector)
+{
+    return Statistics::CohenEffectSize(firstVector, secondVector);
+}

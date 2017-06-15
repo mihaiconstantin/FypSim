@@ -79,3 +79,16 @@ runSelectedCellsWithReplication <- function(selected_cells, design_replications)
     .Call('FypSim_runSelectedCellsWithReplication', PACKAGE = 'FypSim', selected_cells, design_replications)
 }
 
+#' Compute Cohen's effect size
+#'
+#' Compute the \code{d} effect size measure for two numeric vectors.
+#'
+#' @param firstVector (numeric vector) The first vector used in the effect size computations.
+#' @param secondVector (numeric vector) The second vector used in the effect size computations.
+#'
+#' @export
+#'
+effectSizeCohen <- function(firstVector, secondVector) {
+    .Call('FypSim_effectSizeCohen', PACKAGE = 'FypSim', firstVector, secondVector)
+}
+

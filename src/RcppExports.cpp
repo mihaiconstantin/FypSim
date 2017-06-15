@@ -59,12 +59,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// effectSizeCohen
+double effectSizeCohen(Rcpp::NumericVector& firstVector, Rcpp::NumericVector& secondVector);
+RcppExport SEXP FypSim_effectSizeCohen(SEXP firstVectorSEXP, SEXP secondVectorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector& >::type firstVector(firstVectorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector& >::type secondVector(secondVectorSEXP);
+    rcpp_result_gen = Rcpp::wrap(effectSizeCohen(firstVector, secondVector));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"FypSim_buildDesign", (DL_FUNC) &FypSim_buildDesign, 5},
     {"FypSim_runCell", (DL_FUNC) &FypSim_runCell, 5},
     {"FypSim_runSelectedCells", (DL_FUNC) &FypSim_runSelectedCells, 1},
     {"FypSim_runSelectedCellsWithReplication", (DL_FUNC) &FypSim_runSelectedCellsWithReplication, 2},
+    {"FypSim_effectSizeCohen", (DL_FUNC) &FypSim_effectSizeCohen, 2},
     {NULL, NULL, 0}
 };
 

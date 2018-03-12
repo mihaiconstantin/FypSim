@@ -64,5 +64,5 @@ selected = runSelectedCells(design[c(1, 33, 99), ])
 selectedWithReplication = runSelectedCellsWithReplication(design[c(1, 33, 99), ], 100)
 ```
 
-***Note:*** *Check the documentation for each function for more details regarding the inputs and the outputs.*
+***Note:*** *Check the package documentation for each function for more details regarding the inputs and the outputs.*
 

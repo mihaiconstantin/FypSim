@@ -16,7 +16,7 @@
 ## Authors
 
 - [Mihai A. Constantin](https://constantinmihai.com) | Tilburg University
-- *add others here...*
+- *add collaborators here...*
 
 ## Description
 
